@@ -1,0 +1,31 @@
+version: 3.8^
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: championat
+      MYSQL_USER: mathias
+      MYSQL_PASSWORD: test
+    ports:
+      - "3306:3306"
+    networks:
+        - championat
+
+  api:
+    image: championat:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src:/home/app/src
+    environment:
+      MYSQL_HOST: db
+    depends_on:
+      - db
+    networks:
+      - championat
+
+networks:
+  championat:
+    driver: bridge
+    internal: false
