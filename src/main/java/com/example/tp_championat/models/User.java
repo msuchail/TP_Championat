@@ -34,8 +34,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "creation_date")
     @NotNull(message = "La date de création est obligatoire")
+    @Column(name = "creation_date")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate creationDate;
 
