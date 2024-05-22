@@ -1,8 +1,11 @@
 package com.example.tp_championat.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,18 +20,27 @@ public class Day {
     @NotNull(message = "Le numéro de la journée est obligatoire")
     private int number;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "championship_id")
+    @JsonIgnore
     private Championship championship;
 
     @OneToMany(mappedBy = "day")
-    private List<Game> matches;
+    @JsonIgnore
+    private List<Game> games;
+
+
 
     public Day() {
     }
 
+    public void addGame(Game game) {
+        this.games.add(game);
+    }
+
     public Day(int number) {
         this.number = number;
+        this.games = new ArrayList<>();
     }
 
     public Long getId() {
@@ -55,11 +67,11 @@ public class Day {
         this.championship = championship;
     }
 
-    public List<Game> getMatches() {
-        return matches;
+    public List<Game> getGames() {
+        return games;
     }
 
-    public void setMatches(List<Game> matches) {
-        this.matches = matches;
+    public void setGames(List<Game> matches) {
+        this.games = matches;
     }
 }

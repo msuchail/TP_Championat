@@ -44,7 +44,7 @@ public class UserController {
         if(result == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 //    Ajouter un utilisateur

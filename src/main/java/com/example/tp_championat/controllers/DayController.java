@@ -31,7 +31,7 @@ public class DayController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Day> addDay(Day day) {
+    public ResponseEntity<Day> addDay(@RequestBody Day day) {
         Day result = dayRepository.save(day);
         return ResponseEntity.ok(result);
     }

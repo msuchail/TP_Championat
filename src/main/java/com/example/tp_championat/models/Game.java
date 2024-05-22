@@ -1,5 +1,7 @@
 package com.example.tp_championat.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -19,14 +21,17 @@ public class Game {
     private int team2Points;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "team1_id", referencedColumnName = "id")
     private Team team1;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "team2_id", referencedColumnName = "id")
     private Team team2;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "day_id", referencedColumnName = "id")
     private Day day;
 

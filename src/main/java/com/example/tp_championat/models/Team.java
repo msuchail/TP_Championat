@@ -1,9 +1,12 @@
 package com.example.tp_championat.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,6 +25,7 @@ public class Team {
     private LocalDate creationDate;
 
     @ManyToMany(mappedBy = "teams")
+    @JsonIgnore
     private List<Championship> championships;
 
     public Team() {
@@ -30,6 +34,7 @@ public class Team {
     public Team(String name, LocalDate creationDate) {
         this.name = name;
         this.creationDate = creationDate;
+        this.championships = new ArrayList<Championship>();
     }
 
     public long getId() {
